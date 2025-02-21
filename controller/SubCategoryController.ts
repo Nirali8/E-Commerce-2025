@@ -27,10 +27,8 @@ export const getAllSubCategory = async (request: Request, response: Response) =>
  */
 export const getSubCategory = async (request: Request, response: Response) => {
   let { subCategoryId } = request.params;
-  console.log("id",subCategoryId);
   
   const mongoCategoryId = new mongoose.Types.ObjectId(subCategoryId);
-  console.log("mongo",mongoCategoryId);
   
   let theSubCategory: EcomSubCategory | undefined | null =
     await SubCategoryTable.findById(mongoCategoryId);
