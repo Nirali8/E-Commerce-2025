@@ -22,7 +22,7 @@ export const getAllCategory = async (request: Request, response: Response) => {
 /*
  @usage : to get a category
   @method :GET
-  @param : no-param
+  @param : categoryID
   @url : http://localhost:9988/category/categoryID
  */
 export const getCategory = async (request: Request, response: Response) => {
@@ -116,3 +116,33 @@ export const deleteCategory = async (request: Request, response: Response) => {
     });
   }
 };
+
+/*
+  @usage : to Delete category
+  @method :PUT
+  @param : categoryId
+  @url : http://localhost:9988/updateCategory/:categoryId
+ */
+
+export const updateCategoryStatus = async (request: Request, response: Response) => {
+    try {
+        let { categoryId } = request.params;
+        const mongoCategoryId = new mongoose.Types.ObjectId(categoryId);
+        let updateCategory: EcomCategory | null | undefined =
+            await CategoryTable.findByIdAndUpdate(
+                mongoCategoryId,{isActive:false});
+         if (updateCategory) {
+            return response.json({
+                data: updateCategory,
+                msg: "category updated successfully",
+            });
+        }
+    }
+     catch (error) {
+        console.error("Error retrieving product:", error);
+        return response.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+}

@@ -24,7 +24,10 @@ import categoryRouter from "./router/CategoryRouter";
 app.use("/category", categoryRouter);
 
 import SubCategoryRouter from "./router/SubCategoryRouter";
-app.use("/subCategory",SubCategoryRouter)
+app.use("/subCategory", SubCategoryRouter)
+
+import productRouter from "./router/ProductRouter";
+app.use("/product", productRouter);
 
 if (port) {
     app.listen(Number(port), () => {

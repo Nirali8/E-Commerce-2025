@@ -5,7 +5,6 @@ const SubCategoryRouter: Router = Router();
 
 /*
    @usage:to get all sub_Category
-
    @method:GET
    @param:no-param
    @url:http://127.0.0.1:9988/subCaegory
@@ -29,7 +28,6 @@ SubCategoryRouter.get("/:subCategoryId", async (request: Request, response: Resp
 
 /*
     @usage : create a sub_Category
-
     @method : POST
     @params : sub_category_name,sub_category_description,sub_category_logo
     @url : http://localhost:8800/subCategory
@@ -56,7 +54,6 @@ SubCategoryRouter.put("/:subCategoryId", async (request: Request, response: Resp
 
 /*
      @usage : delete a sub_Category
-
     @method : DELETE
     @params : subCategoryId
     @url : http://localhost:8800/subCategory/subCategoryId
@@ -65,6 +62,17 @@ SubCategoryRouter.delete("/:subCategoryId", async (request: Request, response: R
     console.log("Delete sub_category");
     await SubCategoryController.deleteSubCategory(request,response)
    
+})
+
+/*
+     @usage : delete a subcategory
+    @method : PUT
+    @params : subCategoryId
+    @url : http://localhost:8800/updateSubCategory/:subCategoryId
+ */
+SubCategoryRouter.put("/updateSubCategory/:subCategoryId", async (request: Request, response: Response) => {
+    console.log("isActive");
+    await SubCategoryController.updateSubCategoryStatus(request,response)
 })
 
 export default SubCategoryRouter;

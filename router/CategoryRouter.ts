@@ -17,7 +17,7 @@ categoryRouter.get("/", async (request: Request, response: Response) => {
 /*
      @usage:to get a category
     @method:GET
-    @param:no-param
+    @param:categoryId
     @url:http://localhost:9999/category/:categoryId
  */
 categoryRouter.get("/:categoryId",async(request:Request,response:Response)=>{
@@ -27,8 +27,8 @@ categoryRouter.get("/:categoryId",async(request:Request,response:Response)=>{
 /*
     @usage : create a category
     @method : POST
-    @params : name
-    @url : http://localhost:8800/category/:categoryId
+    @params : 
+    @url : http://localhost:8800/category
 */
 
 categoryRouter.post("/",[
@@ -40,7 +40,7 @@ categoryRouter.post("/",[
 /*
     @usage : update a category
     @method : PUT
-    @params : name
+    @params : categoryId
     @url : http://localhost:8800/category/:categoryId
 */
 
@@ -52,13 +52,24 @@ categoryRouter.put("/:categoryId", async (request: Request, response: Response) 
 /*
      @usage : delete a category
     @method : DELETE
-    @params : userId
+    @params : categoryId
     @url : http://localhost:8800/category/:categoryId
  */
 categoryRouter.delete("/:categoryId", async (request: Request, response: Response) => {
     console.log("Delete category");
     await categoryController.deleteCategory(request,response)
    
+})
+
+/*
+     @usage : delete a category
+    @method : PUT
+    @params : categoryId
+    @url : http://localhost:8800/updateCategory/:categoryId
+ */
+categoryRouter.put("/updateCategory/:categoryId", async (request: Request, response: Response) => {
+    console.log("isActive");
+    await categoryController.updateCategoryStatus(request,response)
 })
 
 export default categoryRouter;

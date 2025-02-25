@@ -4,7 +4,7 @@ import { EcomSubCategory } from "../models/EcomSubCategory";
 import mongoose from "mongoose";
 
 /*
-  @usage : to get all category
+  @usage : to get all sub_category
   @method :GET
   @param : no-param
   @url : http://localhost:9988/subCategory
@@ -20,7 +20,7 @@ export const getAllSubCategory = async (request: Request, response: Response) =>
   }
 };
 /*
- @usage : to get a category
+ @usage : to get a sub_category
   @method :GET
   @param : no-param
   @url : http://localhost:9988/subCategory/subCategoryId
@@ -41,7 +41,7 @@ export const getSubCategory = async (request: Request, response: Response) => {
   return response.status(200).json(theSubCategory);
 };
 /*
-    @usage : create a category
+    @usage : create a sub_category
     @method : POST
     @params : sub_category_name,sub_category_description,sub_category_logo
     @url : http://localhost:9988/subCategory
@@ -68,7 +68,7 @@ export const createSubCategory = async (request: Request, response: Response) =>
 };
 
 /*
-    @usage : update a category
+    @usage : update a sub_category
     @method : PUT
     @params :sub_category_name,sub_category_description,sub_category_logo
     @url : http://localhost:9988/subCategory/subCategoryId
@@ -105,7 +105,7 @@ export const subCategoryUpdate = async (request: Request, response: Response) =>
 };
 
 /*
-  @usage : to Delete category
+  @usage : to Delete sub_category
   @method :DELETE
   @param : categoryId
   @url : http://localhost:9988/subCategory/subCategoryId
@@ -122,3 +122,33 @@ export const deleteSubCategory = async (request: Request, response: Response) =>
     });
   }
 };
+
+/*
+  @usage : to Delete subcategory
+  @method :PUT
+  @param : subCategoryId
+  @url : http://localhost:9988/subCategory/subCategoryId
+ */
+
+export const updateSubCategoryStatus = async (request: Request, response: Response) => {
+    try {
+        let { subCategoryId } = request.params;
+        const mongoSubCategoryId = new mongoose.Types.ObjectId(subCategoryId);
+        let updateCategory: EcomSubCategory | null | undefined =
+            await SubCategoryTable.findByIdAndUpdate(
+                mongoSubCategoryId,{isActive:false});
+         if (updateCategory) {
+            return response.json({
+                data: updateCategory,
+                msg: "category updated successfully",
+            });
+        }
+    }
+     catch (error) {
+        console.error("Error retrieving product:", error);
+        return response.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+}
