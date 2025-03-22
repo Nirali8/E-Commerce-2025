@@ -29,6 +29,9 @@ app.use("/subCategory", SubCategoryRouter)
 import productRouter from "./router/ProductRouter";
 app.use("/product", productRouter);
 
+import userRouter from './router/userRouter';
+app.use("/user", userRouter);
+
 if (port) {
     app.listen(Number(port), () => {
         if (dbUrl && dbName) {
